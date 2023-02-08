@@ -1,0 +1,401 @@
+WindowManager:
+	MainWindow:
+	InstructionWindow:
+	GameWindow:
+	AdvanceWindow:
+
+<Button>:
+	id: btn
+	font_size: 15
+	size_hint: (0.2, 0.1)
+	color: (0, 0, 0, 1)
+	background_color: (0, 0, 0, 0) if btn.state == "normal" else (0, 0, 0, 0.1)
+
+
+
+<MainWindow>:
+	name: "main"
+	sound: sound
+	soundpic: soundpic
+
+	FloatLayout:
+		canvas:
+			Color:
+				rgba: 1, 1, 1, 1
+	        Rectangle:
+	            pos: 0,0
+	            size: self.size
+		Image:
+			source: 'game.png'
+			size_hint: 0.35, 0.35
+			pos_hint: {"center_x":0.5, "top":0.95}
+			allow_stretch: True
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.99}
+			allow_stretch: False
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.025}
+			allow_stretch: False
+		Button:
+			id: playbtn
+			pos_hint: {"center_x":0.5, "center_y":0.625}
+			size_hint: (0.4, 0.1)
+			background_color: (0.17, 0.17, 0.17, 0.3) if playbtn.state == "normal" else (0.255, 0.255, 0.255, 0.1)
+			text: "Play"
+			on_release:
+				app.root.current = "game"
+				root.manager.transition.direction = "left"
+		Button:
+			id: instructions
+			pos_hint: {"center_x":0.5, "center_y":0.5}
+			size_hint: (0.4, 0.1)
+			background_color: (0.17, 0.17, 0.17, 0.3) if instructions.state == "normal" else (0.255, 0.255, 0.255, 0.1)
+			text: "Instructions"
+			on_release:
+				app.root.current = "instructions"
+				root.manager.transition.direction = "left"
+		Button:
+			id: sound
+			font_size: 13
+			pos_hint: {"center_x":0.1, "center_y":0.125}
+			size_hint: (0.23, 0.1)
+			on_release: root.audio()
+		Image:
+			id: soundpic
+			source: "volume.png"
+			pos_hint: {"center_x":0.1, "center_y":0.125}
+			size_hint: (0.23, 0.1)
+			allow_stretch: False
+
+
+
+
+<InstructionWindow>:
+	name: "instructions"
+	FloatLayout:
+		canvas:
+			Color:
+				rgba: 1, 1, 1, 1
+	        Rectangle:
+	            pos: 0,0
+	            size: self.size
+		Image:
+			source: 'game.png'
+			size_hint: 0.35, 0.35
+			pos_hint: {"x":0.325, "top":0.99}
+			allow_stretch: True
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.99}
+			allow_stretch: False
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.025}
+			allow_stretch: False
+		Button:
+			pos_hint: {"left":0, "y":0.825}
+			size_hint: (0.2,0.1)
+			text: "<<<"
+			on_release:
+				app.root.current = "main"
+				root.manager.transition.direction = "right"
+		Label:
+			text: u'\u12e8\u12a0\u1328\u12cb\u12c8\u1275 \u1218\u1218\u122a\u12eb'
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			font_size: 18
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.7}
+		Label:
+			text: u'- \u12e8\u1270\u1230\u1321\u1275\u1295 \u134a\u12f0\u120b\u1275 \u1260\u1218\u1320\u1240\u121d \u1243\u120b\u1275\u1295 \u12ed\u1218\u1235\u122d\u1271'
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			text_size: self.width - (self.width/2), None
+			font_size: 11
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.6}
+		Label:
+			text: u'- \u1260\u12a0\u1295\u12f5 \u12d9\u122d \u0033 \u1243\u120b\u1275\u1295 \u1218\u1218\u1235\u1228\u1275 \u12ed\u1320\u1260\u1245\u1265\u12ce\u1273\u120d'
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			text_size: self.width - (self.width/2), None
+			font_size: 11
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.49}
+		Label:
+			text: u'- \u134a\u12f0\u120e\u127d\u1295 \u1260\u1270\u12f0\u130b\u130b\u121a \u1218\u1320\u1240\u121d \u12ed\u127d\u120b\u120d\u1364 \u1290\u1308\u122d \u130d\u1295 \u1243\u120b\u1275\u1295 \u1218\u12f5\u1308\u121d \u12a0\u12ed\u127b\u120d\u121d'
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			text_size: self.width - (self.width/2), None
+			font_size: 11
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.36}
+
+		Label:
+			text: u'- \u12e8\u121a\u1218\u1230\u122d\u1277\u1278\u12cd \u1243\u120b\u1275 \u1263\u1208 \u0031\u1364\u0032\u1364\u0033\u1364\u0034 \u12c8\u12ed\u121d \u12a8\u12da\u12eb \u1260\u120b\u12ed \u134a\u12f0\u120b\u1275 \u120a\u1206\u1291 \u12ed\u127d\u120b\u1209\u1361\u1361'
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			text_size: self.width - (self.width/2), None
+			font_size: 11
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.2}
+
+
+
+<GameWindow>:
+	name: "game"
+	score: score
+	word1: word1
+	word2: word2
+	word3: word3
+	firstline: firstline
+	secondline: secondline
+	thirdline: thirdline
+
+	tl: tl
+	tm: tm
+	tr: tr
+	ml: ml
+	center: center
+	mr: mr
+	bl: bl
+	bm: bm
+	br: br
+
+
+	FloatLayout:
+
+		canvas:
+			Color:
+				rgba: 1, 1, 1, 1 
+	        Rectangle: 
+	            pos: 0,0 
+	            size: self.size
+	    Label:
+	    	id: score
+	    	text: root.points
+	    	font_size: 15
+	    	color: (0,0,0,1)
+	    	pos_hint: {"center_x":0.5, "center_y":0.9}
+
+		Label:
+			id: word1
+			text: ""
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			font_size: 15
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.795}
+
+		Label:
+			id: word2
+			text: ""
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			font_size: 15
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.72}
+
+		Label:
+			id: word3
+			text: ""
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			font_size: 15
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.645}
+
+		Image:
+			id: firstline
+			source: 'line1.png'
+			size_hint: 0.5, 0.35
+			pos_hint: {"center_x": 0.5, "center_y": 0.78}
+			allow_stretch: True
+
+		Image:
+			id: secondline
+			source: 'line1.png'
+			size_hint: 0.5, 0.35
+			pos_hint: {"center_x": 0.5, "center_y": 0.705}
+			allow_stretch: True
+
+		Image:
+			id: thirdline
+			source: 'line1.png'
+			size_hint: 0.5, 0.35
+			pos_hint: {"center_x": 0.5, "center_y": 0.63}
+			allow_stretch: True
+
+
+		Image:
+			source: 'line1.png'
+			size_hint: 0.6, 0.35
+			pos_hint: {"x": 0.2, "y": 0.375}
+			allow_stretch: True
+
+		Image:
+			source: 'line1.png'
+			size_hint: 0.6, 0.35
+			pos_hint: {"x": 0.2, "y": 0.275}
+			allow_stretch: True
+		Image:
+			source: 'line1.png'
+			size_hint: 0.6, 0.35
+			pos_hint: {"x": 0.2, "y": 0.175}
+			allow_stretch: True
+
+		Image:
+			source: 'line1.png'
+			size_hint: 0.6, 0.35
+			pos_hint: {"x": 0.2, "y": 0.075}
+			allow_stretch: True
+
+
+		Image:
+			source: 'line2.png'
+			size_hint: 0.5, 0.3
+			pos_hint: {"x": -0.049, "y": 0.25}
+			allow_stretch: True
+
+		Image:
+			source: 'line2.png'
+			size_hint: 0.5, 0.3
+			pos_hint: {"x": 0.35, "y": 0.25}
+			allow_stretch: True
+		Image:
+			source: 'line2.png'
+			size_hint: 0.5, 0.3
+			pos_hint: {"x": 0.15, "y": 0.25}
+			allow_stretch: True
+		Image:
+			source: 'line2.png'
+			size_hint: 0.5, 0.3
+			pos_hint: {"x": 0.549, "y": 0.25}
+			allow_stretch: True
+
+
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.99}
+			allow_stretch: False
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.025}
+			allow_stretch: False
+		Button:
+			pos_hint: {"left":0, "y":0.825}
+			size_hint: (0.2,0.1)
+			text: "<<<"
+			on_release:
+				app.root.current = "main"
+				root.manager.transition.direction = "right"
+
+		Button:
+			id: button
+			pos_hint: {"center_y":0.12, "x":0}
+			size_hint: (0.8,0.1)
+			background_color: (0, 1, 0, 0.8) if button.state == "normal" else (0, 1, 0, 1)
+			color: (1,1,1,1)
+			text: "Confirm"
+			on_press: root.confirm()
+
+		Button:
+			id: button2
+			pos_hint: {"center_y":0.12, "x":0.8}
+			size_hint: (0.2,0.1)
+			background_color: (1, 0, 0, 0.8) if button2.state == "normal" else (1, 0, 0, 1)
+			color: (1,1,1,1)
+			text: "Del"
+			on_press: root.backspace()
+
+
+		Button:
+			id: tl
+			text: root.tl_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.2, "y":.45}
+			on_press: root.tlpressed()
+		Button:
+			id: tm
+			text: root.tm_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.4, "y":.45}
+			on_press: root.tmpressed()
+		Button:
+			id: tr
+			text: root.tr_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.6, "y":.45}
+			on_press: root.trpressed()
+
+		Button:
+			id: ml
+			text: root.ml_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.2, "y":.35}
+			on_press: root.mlpressed()
+		Button:
+			id: center
+			text: root.center_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.4, "y":.35}
+			on_press: root.centerpressed()
+		Button:
+			id: mr
+			text: root.mr_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.6, "y":.35}
+			on_press: root.mrpressed()
+
+		Button:
+			id: bl
+			text: root.bl_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.2, "y":.25}
+			on_press: root.blpressed()
+		Button:
+			id: bm
+			text: root.bm_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.4, "y":.25}
+			on_press: root.bmpressed()
+		Button:
+			id: br
+			text: root.br_initial
+			font_name: "AbyssinicaSIL-Regular.ttf"
+			pos_hint: {"x":.6, "y":.25}
+			on_press: root.brpressed()
+
+
+<AdvanceWindow>:
+	name: "advance"
+	congratulate: congratulate
+
+	FloatLayout:
+		canvas:
+			Color:
+				rgba: 1, 1, 1, 1
+	        Rectangle:
+	            pos: 0,0
+	            size: self.size
+		Image:
+			source: 'game.png'
+			size_hint: 0.35, 0.35
+			pos_hint: {"x":0.325, "top":0.95}
+			allow_stretch: True
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.99}
+			allow_stretch: False
+		Image:
+			source: 'tilet.png'
+			size_hint: 1, 0.35
+			pos_hint: {"center_y": 0.025}
+			allow_stretch: False
+		Label:
+			id: congratulate
+			text: ""
+			font_size: 15
+			color: (0,0,0,1)
+			pos_hint: {"center_x":0.5, "center_y":0.5}
