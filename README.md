@@ -9,6 +9,11 @@ Children are presented with nine random letters and must make three words out of
 - Endless number of levels
 - Keeps track of progress and scores
 
+## Requirements
+
+- Download and save 'AbyssinicaSIL-Regular.ttf' in the same folder.
+- It can be found at https://fonts.google.com/specimen/Abyssinica+SIL
+
 ## Usage
 Run game from command line with 
 'python main.py'
